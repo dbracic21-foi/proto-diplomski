@@ -5,17 +5,15 @@ package user.v1;
 option go_package = "backend-diplomski/proto/gen/user/v1;userv1";
 
 service AuthService {
-  rpc SignUp (SignUpRequest) returns (SignUpResponse) {}
-  rpc SignIn (SignInRequest) returns (SignInResponse) {}
-  rpc SignOut (SignOutRequest) returns (SignOutResponse) {}
-  rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse) {}
-  rpc ForgotPassword (ForgotPasswordRequest) returns (ForgotPasswordResponse) {}
-
-
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
+  rpc SignIn(SignInRequest) returns (SignInResponse) {}
+  rpc SignOut(SignOutRequest) returns (SignOutResponse) {}
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse) {}
+  rpc ForgotPassword(ForgotPasswordRequest) returns (ForgotPasswordResponse) {}
 }
 
 message UserInfo {
-  string  id = 1;
+  string id = 1;
   string email = 2;
   string username = 3;
 }
@@ -28,7 +26,8 @@ message SignUpRequest {
 
 message SignUpResponse {
   string access_token = 1;
-  UserInfo user_info = 2;
+  string refresh_token = 2;
+  UserInfo user_info = 3;
 }
 
 message SignInRequest {
@@ -38,7 +37,8 @@ message SignInRequest {
 
 message SignInResponse {
   string access_token = 1;
-  UserInfo user_info = 2;
+  string refresh_token = 2;
+  UserInfo user_info = 3;
 }
 
 message ForgotPasswordRequest {
@@ -59,14 +59,10 @@ message RefreshTokenRequest {
 message RefreshTokenResponse {
   string access_token = 1;
   string refresh_token = 2;
-
 }
 
 message SignOutRequest {
- string refresh_token = 1;
+  string refresh_token = 1;
 }
 
-message SignOutResponse {
-
-}
-
+message SignOutResponse {}
