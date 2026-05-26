@@ -3,3 +3,30 @@ syntax = "proto3";
 package upload.v1;
 
 option go_package = "backend-diplomski/proto/gen/upload/v1;uploadv1";
+
+service UploadService {
+  rpc UploadVideo(stream UploadVideoRequest) returns (UploadVideoResponse);
+}
+
+message UploadVideoMetaData {
+  string source = 1;
+  string external_id = 2;
+  string file_name = 3;
+  string content_type = 4;
+  string object_key = 5;
+}
+
+message UploadVideoRequest {
+  oneof payload {
+    UploadVideoMetaData metadata = 1;
+    bytes chunk = 2;
+  }
+}
+
+message UploadVideoResponse {
+  string bucket = 1;
+  string object_key = 2;
+  string mime_type = 3;
+  int64 size_bytes = 4;
+  string original_file_name = 5;
+}
