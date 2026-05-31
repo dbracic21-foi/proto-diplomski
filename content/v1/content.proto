@@ -3,3 +3,24 @@ syntax = "proto3";
 package interaction.v1;
 
 option go_package = "backend-diplomski/proto/gen/interaction/v1;interactionv1";
+
+service ContentService {
+  rpc CreateVideo(CreateVideoRequest) returns (CreateVideoResponse) {}
+}
+
+message CreateVideoRequest {
+  string title = 1;
+  string description = 2;
+  string stroage_key = 3;
+  string thumbnail_key = 4;
+  string mime_type = 5;
+  int32 duration_second = 6;
+  string status = 7;
+}
+
+message CreateVideoResponse {
+  string id = 1;
+  string title = 2;
+  string stroage_key = 3;
+  string status = 4;
+}
