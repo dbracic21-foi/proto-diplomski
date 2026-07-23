@@ -6,6 +6,7 @@ option go_package = "backend-diplomski/proto/gen/interaction/v1;interactionv1";
 
 service ContentService {
   rpc CreateVideo(CreateVideoRequest) returns (CreateVideoResponse) {}
+  rpc ListFeedVideos(ListFeedVideosRequest) returns (ListFeedVideosResponse) {}
 }
 
 message CreateVideoRequest {
@@ -23,4 +24,26 @@ message CreateVideoResponse {
   string title = 2;
   string stroage_key = 3;
   string status = 4;
+}
+
+message ListFeedVideosRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message ListFeedVideosResponse {
+  repeated FeedVideo videos = 1;
+}
+
+message FeedVideo {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string stroage_key = 4;
+  string video_url = 5;
+  string thumbnail_key = 6;
+  string mime_type = 7;
+  int32 duration_second = 8;
+  string status = 9;
+  string created_at = 10;
 }
