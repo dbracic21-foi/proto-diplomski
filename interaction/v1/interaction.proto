@@ -1,5 +1,69 @@
 syntax = "proto3";
 
-package user.v1;
+package interaction.v1;
 
-option go_package = "backend-diplomski/proto/gen/user/v1;userv1";
+option go_package = "backend-diplomski/proto/gen/interaction/v1;interactionv1";
+option java_multiple_files = true;
+option java_package = "com.example.feeder.proto.interaction.v1";
+option java_outer_classname = "InteractionProto";
+
+service InteractionService {
+    rpc CreateInteraction(CreateInteractionRequest)
+        returns (CreateInteractionResponse);
+    
+    rpc RecordWatchSession(RecordWatchSessionRequest)
+        returns (RecordWatchSessionResponse);
+
+    rpc GetVideoInteractionSummary(GetVideoInteractionSummaryRequest)
+        returns (GetVideoInteractionSummaryResponse);
+}
+
+enum InteractionType {
+    INTERACTION_TYPE_UNSPECIFIED = 0;
+    INTERACTION_TYPE_LIKE = 1;
+    INTERACTION_TYPE_UNLIKE = 2;
+    INTERACTION_TYPE_SKIP = 3;
+}
+
+message CreateInteractionRequest {
+  string user_id = 1;
+  string video_id = 2;
+  InteractionType interaction_type = 3;
+}
+
+message CreateInteractionResponse {
+  string id = 1;
+  string user_id = 2;
+  string video_id = 3;
+  InteractionType interaction_type = 4;
+  string created_at = 5;
+}
+
+message RecordWatchSessionRequest {
+  string user_id = 1;
+  string video_id = 2;
+  int32 watched_seconds = 3;
+  bool completed = 4;
+  string started_at = 5;
+  string ended_at = 6;
+}
+
+message RecordWatchSessionResponse {
+  string id = 1;
+  string user_id = 2;
+  string video_id = 3;
+  int32 watched_seconds = 4;
+  bool completed = 5;
+  string started_at = 6;
+  string ended_at = 7;
+}
+
+message GetVideoInteractionSummaryRequest {
+  string video_id = 1;
+  string user_id = 2;
+}
+
+message GetVideoInteractionSummaryResponse {
+  int64 like_count = 1;
+  bool liked_by_user = 2;
+}
