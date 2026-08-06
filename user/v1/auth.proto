@@ -10,6 +10,7 @@ service AuthService {
   rpc SignOut(SignOutRequest) returns (SignOutResponse) {}
   rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse) {}
   rpc ForgotPassword(ForgotPasswordRequest) returns (ForgotPasswordResponse) {}
+  rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse);
 }
 
 message UserInfo {
@@ -71,3 +72,12 @@ message SignOutRequest {
 }
 
 message SignOutResponse {}
+
+message VerifyEmailRequest {
+  string token = 1;
+}
+
+message VerifyEmailResponse {
+  bool verified = 1;
+  string message = 2;
+}
