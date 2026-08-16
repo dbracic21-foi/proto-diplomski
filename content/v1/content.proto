@@ -20,6 +20,9 @@ message CreateVideoRequest {
   string mime_type = 5;
   int32 duration_second = 6;
   string status = 7;
+
+  repeated string categories = 8;
+  repeated string tags = 9;
 }
 
 message CreateVideoResponse {
