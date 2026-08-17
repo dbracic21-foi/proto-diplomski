@@ -4,25 +4,24 @@ package interaction.v1;
 
 option go_package = "backend-diplomski/proto/gen/interaction/v1;interactionv1";
 option java_multiple_files = true;
-option java_package = "com.example.feeder.proto.interaction.v1";
 option java_outer_classname = "InteractionProto";
+option java_package = "com.example.feeder.proto.interaction.v1";
 
 service InteractionService {
-    rpc CreateInteraction(CreateInteractionRequest)
-        returns (CreateInteractionResponse);
-    
-    rpc RecordWatchSession(RecordWatchSessionRequest)
-        returns (RecordWatchSessionResponse);
+  rpc CreateInteraction(CreateInteractionRequest) returns (CreateInteractionResponse);
 
-    rpc GetVideoInteractionSummary(GetVideoInteractionSummaryRequest)
-        returns (GetVideoInteractionSummaryResponse);
+  rpc RecordWatchSession(RecordWatchSessionRequest) returns (RecordWatchSessionResponse);
+
+  rpc GetVideoInteractionSummary(GetVideoInteractionSummaryRequest) returns (GetVideoInteractionSummaryResponse);
+
+  rpc GetUserInteractionHistory(GetUserInteractionHistoryRequest) returns (GetUserInteractionHistoryResponse);
 }
 
 enum InteractionType {
-    INTERACTION_TYPE_UNSPECIFIED = 0;
-    INTERACTION_TYPE_LIKE = 1;
-    INTERACTION_TYPE_UNLIKE = 2;
-    INTERACTION_TYPE_SKIP = 3;
+  INTERACTION_TYPE_UNSPECIFIED = 0;
+  INTERACTION_TYPE_LIKE = 1;
+  INTERACTION_TYPE_UNLIKE = 2;
+  INTERACTION_TYPE_SKIP = 3;
 }
 
 message CreateInteractionRequest {
@@ -66,4 +65,22 @@ message GetVideoInteractionSummaryRequest {
 message GetVideoInteractionSummaryResponse {
   int64 like_count = 1;
   bool liked_by_user = 2;
+}
+
+message GetUserInteractionHistoryRequest {
+  string user_id = 1;
+}
+
+message UserVideoInteraction {
+  string video_id = 1;
+  bool liked = 2;
+  bool unliked = 3;
+  bool skipped = 4;
+  int32 total_watched_seconds = 5;
+  int32 watch_session_count = 6;
+  int32 completed_count = 7;
+}
+
+message GetUserInteractionHistoryResponse {
+  repeated UserVideoInteraction interactions = 1;
 }
