@@ -10,6 +10,7 @@ option java_package = "com.example.feeder.proto.content.v1";
 service ContentService {
   rpc CreateVideo(CreateVideoRequest) returns (CreateVideoResponse) {}
   rpc ListFeedVideos(ListFeedVideosRequest) returns (ListFeedVideosResponse) {}
+  rpc GetVideoMetadata(GetVideoMetadataRequest) returns (GetVideoMetadataResponse) {}
 }
 
 message CreateVideoRequest {
@@ -52,4 +53,24 @@ message FeedVideo {
   int32 duration_second = 8;
   string status = 9;
   string created_at = 10;
+}
+
+message GetVideoMetadataRequest {
+  string video_id = 1;
+}
+
+message Category {
+  string id = 1;
+  string name = 2;
+}
+
+message Tag {
+  string id = 1;
+  string name = 2;
+}
+
+message GetVideoMetadataResponse {
+  string video_id = 1;
+  repeated Category categories = 2;
+  repeated Tag tags = 3;
 }
