@@ -74,6 +74,7 @@ message GetVideoMetadataResponse {
   string video_id = 1;
   repeated Category categories = 2;
   repeated Tag tags = 3;
+  int32 duration_second = 4;
 }
 
 message ListRecommendationCandidatesRequest {
@@ -83,6 +84,7 @@ message ListRecommendationCandidatesRequest {
 message RecommendationCandidate {
   string video_id = 1;
   repeated Category categories = 2;
+  int32 duration_second = 3;
 }
 
 message ListRecommendationCandidatesResponse {
