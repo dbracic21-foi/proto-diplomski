@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package recommendation.v1;
+
+option go_package = "backend-diplomski/proto/gen/recommendation/v1;recommendationv1";
+option java_multiple_files = true;
+option java_outer_classname = "RecommendationProto";
+option java_package = "com.example.feeder.proto.recommendation.v1";
+
+service RecommendationService {
+  rpc GetRecommendations(GetRecommendationsRequest) returns (GetRecommendationsResponse) {}
+}
+
+message GetRecommendationsRequest {
+  string user_id = 1;
+  int32 limit = 2;
+}
+
+message RecommendedVideo {
+  string video_id = 1;
+  double score = 2;
+}
+
+message GetRecommendationsResponse {
+  repeated RecommendedVideo videos = 1;
+}
