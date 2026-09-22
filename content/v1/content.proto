@@ -12,6 +12,7 @@ service ContentService {
   rpc ListFeedVideos(ListFeedVideosRequest) returns (ListFeedVideosResponse) {}
   rpc GetVideoMetadata(GetVideoMetadataRequest) returns (GetVideoMetadataResponse) {}
   rpc ListRecommendationCandidates(ListRecommendationCandidatesRequest) returns (ListRecommendationCandidatesResponse);
+  rpc GetVideosByIds(GetVideosByIdsRequest) returns (GetVideosByIdsResponse);
 }
 
 message CreateVideoRequest {
@@ -89,4 +90,12 @@ message RecommendationCandidate {
 
 message ListRecommendationCandidatesResponse {
   repeated RecommendationCandidate videos = 1;
+}
+
+message GetVideosByIdsRequest {
+  repeated string video_ids = 1;
+}
+
+message GetVideosByIdsResponse {
+  repeated FeedVideo videos = 1;
 }
